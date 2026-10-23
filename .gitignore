@@ -1,24 +1,42 @@
-# Compiled class file
-*.class
+# Сборка и бинарники Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
 
-# Log file
+# Конфиденциальные данные и локальные настройки
+.env
+*.local
+*.env.local
+
+# Логи
 *.log
+logs/
 
-# BlueJ files
-*.ctxt
+# Настройки IDE (IntelliJ IDEA, Eclipse, NetBeans, VS Code)
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.vscode/
+.settings/
+.project
+.classpath
+.factorypath
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# Системные файлы ОС
+.DS_Store
+Thumbs.db
+desktop.ini
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# Исходники предыдущего задания и методички (если не нужны в репозитории лабы 3)
+zadanie3*.pdf
+"Задание 2"/
+Задание*.png

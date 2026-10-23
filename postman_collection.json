@@ -1,0 +1,534 @@
+{
+  "info": {
+    "_postman_id": "lab3-var22-dormitory",
+    "name": "Лабораторная работа 3 (Вариант 22) - Распределение мест в общежитии",
+    "description": "Полная коллекция запросов: CRUD-операции по всем 5 сущностям и 5 сквозных транзакционных бизнес-операций со сценариями изменения состояния.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. CRUD — Пользователи (Users)",
+      "item": [
+        {
+          "name": "Получить всех пользователей",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/users"
+          }
+        },
+        {
+          "name": "Получить пользователя по ID (1)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/users/1"
+          }
+        },
+        {
+          "name": "Создать нового студента",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Кузнецов Дмитрий Романович\",\n  \"email\": \"kuznetsov@university.ru\",\n  \"role\": \"STUDENT\"\n}"
+            },
+            "url": "{{baseUrl}}/api/users"
+          }
+        },
+        {
+          "name": "Обновить пользователя (PATCH)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Кузнецов Дмитрий Романович (Староста)\"\n}"
+            },
+            "url": "{{baseUrl}}/api/users/6"
+          }
+        },
+        {
+          "name": "Удалить пользователя",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/users/6"
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. CRUD — Комнаты (Rooms)",
+      "item": [
+        {
+          "name": "Получить все комнаты",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/rooms"
+          }
+        },
+        {
+          "name": "Получить комнату по ID (1)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/rooms/1"
+          }
+        },
+        {
+          "name": "Создать новую комнату",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roomNumber\": \"401\",\n  \"capacity\": 2,\n  \"isAvailable\": true\n}"
+            },
+            "url": "{{baseUrl}}/api/rooms"
+          }
+        },
+        {
+          "name": "Обновить доступность комнаты",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"isAvailable\": true\n}"
+            },
+            "url": "{{baseUrl}}/api/rooms/401"
+          }
+        },
+        {
+          "name": "Удалить комнату",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/rooms/6"
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. CRUD — Заявления на проживание (Housing Applications)",
+      "item": [
+        {
+          "name": "Получить все заявления",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/housing-applications"
+          }
+        },
+        {
+          "name": "Получить заявление по ID (3)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/housing-applications/3"
+          }
+        },
+        {
+          "name": "Подать новое заявление (User 4)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": 4\n}"
+            },
+            "url": "{{baseUrl}}/api/housing-applications"
+          }
+        },
+        {
+          "name": "Обновить статус заявления на REJECTED",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"REJECTED\"\n}"
+            },
+            "url": "{{baseUrl}}/api/housing-applications/4"
+          }
+        },
+        {
+          "name": "Удалить заявление",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/housing-applications/4"
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. CRUD — Договоры проживания (Residence Contracts)",
+      "item": [
+        {
+          "name": "Получить все договоры",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/residence-contracts"
+          }
+        },
+        {
+          "name": "Получить договор по ID (1)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/residence-contracts/1"
+          }
+        },
+        {
+          "name": "Создать договор вручную (CRUD)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"applicationId\": 3,\n  \"roomId\": 4,\n  \"checkInDate\": \"2026-09-01\",\n  \"checkOutDate\": \"2027-06-30\"\n}"
+            },
+            "url": "{{baseUrl}}/api/residence-contracts"
+          }
+        },
+        {
+          "name": "Обновить даты договора (PATCH)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"checkOutDate\": \"2027-07-15\"\n}"
+            },
+            "url": "{{baseUrl}}/api/residence-contracts/1"
+          }
+        },
+        {
+          "name": "Удалить договор",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/residence-contracts/3"
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. CRUD — Заявки на переселение (Room Transfer Requests)",
+      "item": [
+        {
+          "name": "Получить все заявки на переселение",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/room-transfer-requests"
+          }
+        },
+        {
+          "name": "Получить заявку на переселение по ID (1)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/room-transfer-requests/1"
+          }
+        },
+        {
+          "name": "Подать заявку на переселение (Contract 2 -> Room 3)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contractId\": 2,\n  \"targetRoomId\": 3\n}"
+            },
+            "url": "{{baseUrl}}/api/room-transfer-requests"
+          }
+        },
+        {
+          "name": "Обновить заявку на переселение (PATCH)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"targetRoomId\": 4\n}"
+            },
+            "url": "{{baseUrl}}/api/room-transfer-requests/1"
+          }
+        },
+        {
+          "name": "Удалить заявку на переселение",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/api/room-transfer-requests/2"
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. Бизнес-операция 1: Заселение студента (Check-in)",
+      "item": [
+        {
+          "name": "Успешное заселение (Application 3 -> Room 1)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"applicationId\": 3,\n  \"roomId\": 1,\n  \"checkInDate\": \"2026-09-01\",\n  \"checkOutDate\": \"2027-06-30\"\n}"
+            },
+            "url": "{{baseUrl}}/api/operations/check-in"
+          }
+        },
+        {
+          "name": "Отказ: Попытка заселения в переполненную/заблокированную комнату (Room 2)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"applicationId\": 4,\n  \"roomId\": 2,\n  \"checkInDate\": \"2026-09-01\",\n  \"checkOutDate\": \"2027-06-30\"\n}"
+            },
+            "url": "{{baseUrl}}/api/operations/check-in"
+          }
+        },
+        {
+          "name": "Отказ: Некорректные даты (выезд раньше заезда)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"applicationId\": 4,\n  \"roomId\": 3,\n  \"checkInDate\": \"2027-06-30\",\n  \"checkOutDate\": \"2026-09-01\"\n}"
+            },
+            "url": "{{baseUrl}}/api/operations/check-in"
+          }
+        }
+      ]
+    },
+    {
+      "name": "7. Бизнес-операция 2: Переселение студента (Approve Transfer)",
+      "item": [
+        {
+          "name": "Успешное одобрение переселения (Request 1)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{baseUrl}}/api/operations/transfers/1/approve"
+          }
+        },
+        {
+          "name": "Отказ: Повторное одобрение уже обработанной заявки",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{baseUrl}}/api/operations/transfers/1/approve"
+          }
+        }
+      ]
+    },
+    {
+      "name": "8. Бизнес-операция 3: Досрочное выселение / Расторжение договора",
+      "item": [
+        {
+          "name": "Успешное расторжение договора (Contract 1)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Выпуск из университета\",\n  \"terminationDate\": \"2026-10-23\"\n}"
+            },
+            "url": "{{baseUrl}}/api/operations/contracts/1/terminate"
+          }
+        },
+        {
+          "name": "Отказ: Попытка расторгнуть уже закрытый договор",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Повторная попытка\"\n}"
+            },
+            "url": "{{baseUrl}}/api/operations/contracts/1/terminate"
+          }
+        }
+      ]
+    },
+    {
+      "name": "9. Бизнес-операция 4: Пакетное закрытие истекших договоров",
+      "item": [
+        {
+          "name": "Запуск регламентного закрытия договоров на будущую дату",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/operations/contracts/process-expirations?asOfDate=2028-01-01",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "operations",
+                "contracts",
+                "process-expirations"
+              ],
+              "query": [
+                {
+                  "key": "asOfDate",
+                  "value": "2028-01-01"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "10. Бизнес-операция 5: Вывод комнаты на ремонт / техобслуживание",
+      "item": [
+        {
+          "name": "Отказ: Попытка закрыть занятую комнату 201 (политика REJECT_IF_OCCUPIED)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Плановый косметический ремонт\",\n  \"policy\": \"REJECT_IF_OCCUPIED\"\n}"
+            },
+            "url": "{{baseUrl}}/api/operations/rooms/3/maintenance"
+          }
+        },
+        {
+          "name": "Успех: Вывод пустой комнаты 101 на ремонт",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Замена сантехники\",\n  \"policy\": \"REJECT_IF_OCCUPIED\"\n}"
+            },
+            "url": "{{baseUrl}}/api/operations/rooms/1/maintenance"
+          }
+        },
+        {
+          "name": "Успех: Аварийное закрытие комнаты с принудительным расторжением договоров",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Аварийный прорыв трубы\",\n  \"policy\": \"FORCE_TERMINATE_CONTRACTS\"\n}"
+            },
+            "url": "{{baseUrl}}/api/operations/rooms/2/maintenance"
+          }
+        }
+      ]
+    }
+  ]
+}
